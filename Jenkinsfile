@@ -14,7 +14,7 @@ pipeline {
     	}
         stage('Inicio') {
             steps {
-            	echo "Estou na master..."
+            	echo "Estou na develop..."
             	echo "$GIT_BRANCH"
                 echo 'Hello World'
             }
