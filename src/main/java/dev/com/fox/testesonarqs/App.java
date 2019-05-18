@@ -8,6 +8,9 @@ public class App
 {	
     public static void main( String[] args )
     {
-    	System.out.println( "Hello World!" );
+    	String msg = new String();
+        Hello hello = new Hello();
+        
+        msg.concat(hello.getMsg());
     }
 }
