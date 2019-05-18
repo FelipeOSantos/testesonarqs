@@ -14,6 +14,7 @@ pipeline {
     	}
         stage('Inicio') {
             steps {
+            	echo "$GIT_BRANCH"
                 echo 'Hello World'
             }
         }
