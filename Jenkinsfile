@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarLocal') {
                     withMaven(maven: 'maven_3.6') {
-                        sh "mvn -f ${params.PATH_PROJETO} sonar:sonar -Dsonar.branch=${env.GIT_BRANCH}"
+                        sh "mvn -f ${params.PATH_PROJETO} sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.branch=${env.GIT_BRANCH}"
                     }
                 }
             }
