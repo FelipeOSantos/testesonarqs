@@ -28,7 +28,7 @@ pipeline {
 		                def qg = waitForQualityGate()
 		                if (qg.status != 'OK') {
 		                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
-							rocketSend attachments: [[audioUrl: '', authorIcon: '', authorName: '', color: '#764FA5', imageUrl: '/images/integration-attachment-example.png', messageLink: '', text: 'Rocket.Chat, the best open source chat', thumbUrl: '', title: 'Rocket.Chat', titleLink: 'https://rocket.chat', videoUrl: '']], failOnError: true, message: '', webhookToken: 'http://10.130.214.117:3300/hooks/ZbS27zr2S27rZjdod/LAyWdR2hBXzwviBoD7c4sJKsZ4NP8bibmFMHkHaKPayjrAiz'
+							rocketSend channel: 'general', message: 'My message', rawMessage: true
 		                }
 		            }
         		}
