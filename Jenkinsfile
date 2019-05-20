@@ -4,19 +4,29 @@ pipeline {
         disableConcurrentBuilds()
     }
     parameters {
-        string(name: 'CUSTOM_PATH', defaultValue: 'poc', description: 'Caminho do projeto a ser analisado')
+        string(name: 'PATH_PROJETO', defaultValue: 'poc/testesonarqs', description: 'Path do Projeto a ser analisado')
     }
     stages {
-    	stage('Checkout') {
-    		steps {
+        stage('Checkout') {
+            steps {
                 checkout scm
             }
-    	}
-        stage('Inicio') {
+        }
+        stage('Analise Sonar') {
             steps {
-            	echo "Estou na develop..."
-            	echo "$GIT_BRANCH"
-                echo 'Hello World'
+                withSonarQubeEnv('SonarLocal') {
+                    withMaven(maven: 'maven_3.6') {
+                        sh "mvn -f ${params.PATH_PROJETO} sonar:sonar -Dsonar.branch=${env.GIT_BRANCH}"
+                    }
+                }
+            }
+        }
+        stage("Quality Gate"){
+            timeout(5) {
+                def qg = waitForQualityGate()
+                if (qg.status != 'OK') {
+                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                }
             }
         }
     }
