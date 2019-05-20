@@ -28,6 +28,11 @@ pipeline {
 		                def qg = waitForQualityGate()
 		                if (qg.status != 'OK') {
 		                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
+							rocketSend
+							    attachments: [
+							        [$class: 'MessageAttachment', color: 'red', text: 'Something failed', title: 'my other attachment']
+							    ],
+							    channel: 'general', message: 'My message', rawMessage: true
 		                }
 		            }
         		}
