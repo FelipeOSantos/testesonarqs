@@ -29,7 +29,7 @@ pipeline {
 		                if (qg.status != 'OK') {
 		                	rocketSend
 							    attachments: [
-							        [$class: 'MessageAttachment', authorName: 'Jenkins', color: 'red', text: "${qg.status}", title: 'Quality gate status'],
+							        [$class: 'MessageAttachment', authorName: 'Jenkins', color: 'red', text: "${qg.status}", title: 'Quality gate status']
 							    ],
 							    channel: 'general',
 							    message: "Build ${currentBuild.displayName} for Job [${env.JOB_NAME} ${env.GIT_BRANCH}] analyzed. See ${env.BUILD_URL}. Build status: ${currentBuild.currentResult}",
