@@ -24,6 +24,10 @@ pipeline {
         stage("Quality Gate"){
         	steps {
         		script {
+	        		sh 'env > env.txt' 
+					for (String i : readFile('env.txt').split("\r?\n")) {
+					    println i
+					}
         			timeout(5) {
 		                def qg = waitForQualityGate()
 		                if (qg.status != 'OK') {
