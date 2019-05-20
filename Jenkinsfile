@@ -14,24 +14,13 @@ pipeline {
         }
         stage('Analise Sonar') {
             steps {
-                withSonarQubeEnv('SonarLocal') {
+
                     withMaven(maven: 'maven_3.6') {
                         sh "mvn -f ${params.PATH_PROJETO} sonar:sonar -Dsonar.branch=${env.GIT_BRANCH}"
                     }
-                }
+
             }
         }
-        stage("Quality Gate"){
-        	steps {
-        		script {
-        			timeout(5) {
-		                def qg = waitForQualityGate()
-		                if (qg.status != 'OK') {
-		                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
-		                }
-		            }
-        		}
-        	}
-        }
+
     }
 }
