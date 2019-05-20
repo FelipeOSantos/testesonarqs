@@ -28,7 +28,7 @@ pipeline {
 		                def qg = waitForQualityGate()
 		                if (qg.status != 'OK') {
 		                	rocketSend attachments: [[$class: 'MessageAttachment', color: 'red', text: "${qg.status}", title: 'Quality gate status']], channel: 'sigres-database-deploy', emoji: ':jenkins:', message: "Build ${currentBuild.displayName} for Job [${env.JOB_NAME} ${env.GIT_BRANCH}] analyzed. See ${env.BUILD_URL}. Build status: ${currentBuild.currentResult}", rawMessage: true
-		                	sh """curl -X POST -H 'Content-Type: application/json' --data '{"text":"Build ${currentBuild.displayName} for Job [${env.JOB_NAME} ${env.GIT_BRANCH}] analyzed. See ${env.BUILD_URL}. Build status: ${currentBuild.currentResult}","attachments":[{"title":"Quality gate status","text":"${qg.status}","color":"red"}]}' http://10.130.214.117:3300/hooks/ZbS27zr2S27rZjdod/LAyWdR2hBXzwviBoD7c4sJKsZ4NP8bibmFMHkHaKPayjrAiz"""
+		                	//sh """curl -X POST -H 'Content-Type: application/json' --data '{"text":"Build ${currentBuild.displayName} for Job [${env.JOB_NAME} ${env.GIT_BRANCH}] analyzed. See ${env.BUILD_URL}. Build status: ${currentBuild.currentResult}","attachments":[{"title":"Quality gate status","text":"${qg.status}","color":"red"}]}' http://10.130.214.117:3300/hooks/ZbS27zr2S27rZjdod/LAyWdR2hBXzwviBoD7c4sJKsZ4NP8bibmFMHkHaKPayjrAiz"""
 		                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
 		                }
 		            }
