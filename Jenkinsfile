@@ -4,7 +4,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     parameters {
-        string(name: 'PATH_PROJETO', defaultValue: 'poc/testesonarqs', description: 'Path do Projeto a ser analisado')
+        string(name: 'PATH_PROJETO', defaultValue: '.', description: 'Path do Projeto a ser analisado')
     }
     stages {
         stage('Checkout') {
